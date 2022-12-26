@@ -1,0 +1,153 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+    <mat-toolbar color="primary" class="example-toolbar">
+        <button mat-icon-button (click)="snav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <h1 class="example-app-name">Vendor Management Portal</h1>
+        <span style="flex: 1 1 auto;"></span>
+        <div>
+            <button mat-icon-button matTooltip="Notifications">
+                <mat-icon>notifications</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="My Account" [matMenuTriggerFor]="accountMenu">
+                <mat-icon>apps</mat-icon>
+            </button>
+            <mat-menu #accountMenu [overlapTrigger]="false" yPosition="below">
+                <button mat-menu-item routerLink="#">
+                    <mat-icon>person</mat-icon><span>My Account</span>
+                </button>
+                <button mat-menu-item>
+
+                    <mat-list-item routerLink="/user/resetpassword">
+                        <mat-icon>change_circle</mat-icon><span>Reset Password</span>
+                    </mat-list-item>
+                </button>
+                <mat-divider></mat-divider>
+                <button mat-menu-item (click)="signOut()">
+                    <mat-icon>exit_to_app</mat-icon>Logout
+                </button>
+            </mat-menu>
+        </div>
+        <ng-template #loading>
+            Loading stuff...
+        </ng-template>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+            fixedTopGap="56">
+            <mat-nav-list dense>
+                <mat-card>
+                    <mat-card-header>
+                        <div mat-card-avatar id="profile" [class.avatar-open]="isMenuOpen"
+                            [class.avatar-close]="!isMenuOpen">
+
+                        </div>
+                        <div>
+                            <mat-card-title>{{ user?.family_name}}</mat-card-title>
+                        </div>
+
+                    </mat-card-header>
+                </mat-card>
+                <mat-list-item routerLink="/admin/dashboard">
+                    <mat-icon>dashboard</mat-icon>
+                    <span style="font-size:15px;font-weight: 400;font-family: Roboto, Helvetica Neue, sans-serif;">
+                        Dashboard
+                    </span>
+                </mat-list-item>
+                <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+                    <mat-expansion-panel-header>
+                        Master Data
+                    </mat-expansion-panel-header>
+                    <mat-nav-list dense>
+                        <a mat-list-item routerLink="/commissionmethod">
+                            <mat-icon>list_alt</mat-icon>Commission Method
+                        </a>
+                        <a mat-list-item routerLink="/contractstatus">
+                            <mat-icon>list_alt</mat-icon>Contract Status
+                        </a>
+                        <a mat-list-item routerLink="/contracttype">
+                            <mat-icon>list_alt</mat-icon>Contract Type
+                        </a>
+                        <a mat-list-item routerLink="/partnertype">
+                            <mat-icon>list_alt</mat-icon>Partner Type
+                        </a>
+
+                    </mat-nav-list>
+
+                </mat-expansion-panel>
+
+                <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+                    <mat-expansion-panel-header>
+                        User Management
+                    </mat-expansion-panel-header>
+                    <mat-nav-list dense>
+                        <a mat-list-item routerLink="/role/roles">
+                            <mat-icon>assignment_ind</mat-icon>Role
+                        </a>
+                        <a mat-list-item routerLink="/user/users">
+                            <mat-icon>person</mat-icon>User
+                        </a>
+                    </mat-nav-list>
+
+                </mat-expansion-panel>
+
+
+                <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+                    <mat-expansion-panel-header>
+                        Permission Management
+                    </mat-expansion-panel-header>
+                    <mat-nav-list dense>
+                        <a mat-list-item routerLink="/waterbodyPermission">
+                            <mat-icon>assignment_ind</mat-icon>Permissions
+                        </a>
+                    </mat-nav-list>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+                    <mat-expansion-panel-header>
+                        Vendor Details
+                    </mat-expansion-panel-header>
+                    <mat-nav-list dense>
+                        <a mat-list-item routerLink="/waterbodyupload">
+                            <mat-icon>supervised_user_circle</mat-icon>Partners
+                        </a>
+                        <a mat-list-item routerLink="/review">
+                            <mat-icon>assignment</mat-icon>Contracts
+                        </a>
+                        <a mat-list-item routerLink="/review/approvedresponse">
+                            <mat-icon>payment</mat-icon>Sales
+                        </a>
+                        <a mat-list-item routerLink="/review/approvedresponse">
+                            <mat-icon>report</mat-icon>Statements
+                        </a>
+                    </mat-nav-list>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+                    <mat-expansion-panel-header>
+                        Reports
+                    </mat-expansion-panel-header>
+                    <mat-nav-list dense>
+
+                    </mat-nav-list>
+                </mat-expansion-panel>
+
+
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <router-outlet>
+
+            </router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+    <mat-toolbar color="lime" class="footer-toolbar">
+        Copyright @ {{ currentYear }} Nmatrix . All Rights Reserved.
+        <span style="flex: 1 1 auto;"></span>
+        <div>
+
+        </div>
+    </mat-toolbar>
+</div>
