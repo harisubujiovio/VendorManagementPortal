@@ -1,3 +1,4 @@
+import { IDictionary } from './../models/IDictionary';
 import { IResourceRoot } from './../models/IResourceRoot';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -22,10 +23,11 @@ export abstract class ResourceService<T> {
   fromServerModel(json: any): T {
     return json;
   }
-  getDictionary(): Observable<T[]> {
-    return this.httpClient.get<T[]>(`${this.APIUrl}/GetDictionary`)
+  getDictionary(): Observable<IDictionary[]> {
+    console.log(`${this.APIUrl}/GetDictionary`)
+    return this.httpClient.get<IDictionary[]>(`${this.APIUrl}/GetDictionary`)
       .pipe(
-        catchError(handleError<T[]>('getDictionary'))
+        catchError(handleError<IDictionary[]>('getDictionary'))
       );
   }
 
@@ -36,8 +38,8 @@ export abstract class ResourceService<T> {
       .set('sortCol', sortField)
       .set('sortType', sortOrder);
     console.log(this.APIUrl)
-    console.log(`${this.APIUrl}?${params.toString()}`)
-    return this.httpClient.get<IResourceRoot>(`${this.APIUrl}?${params.toString()}`)
+    console.log(`${this.APIUrl}/GetAll?${params.toString()}`)
+    return this.httpClient.get<IResourceRoot>(`${this.APIUrl}/GetAll?${params.toString()}`)
       .pipe(
         catchError(handleError<IResourceRoot>('getList'))
       );

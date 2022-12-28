@@ -1,0 +1,34 @@
+.container {
+    padding: 20px;
+}
+
+.flexcontainer {
+    margin: 15px;
+}
+/* .mat-column-entryNo {
+    flex: 0 0 3%;
+}
+.mat-column-partner {
+    flex: 0 0 10%;
+}
+.mat-column-documentType {
+    flex: 0 0 8%;
+}
+.mat-column-code {
+    flex: 0 0 8%;
+}
+.mat-column-documentLineNo {
+    flex: 0 0 8%;
+} */
+.mat-column-date {
+    flex: 0 0 8%;
+}
+.mat-column-details {
+    flex: 0 0 10%;
+}
+.mat-column-update {
+    flex: 0 0 10%;
+}
+.mat-column-delete {
+    flex: 0 0 10%;
+}

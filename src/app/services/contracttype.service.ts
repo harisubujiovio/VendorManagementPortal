@@ -13,6 +13,6 @@ export abstract class ContracttypeService extends ResourceService<IResource> {
   }
 
   getResourceUrl(): string {
-    return '/ContractType/GetAll';
+    return '/ContractType';
   }
 }

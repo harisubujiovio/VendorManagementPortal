@@ -14,6 +14,6 @@ export class CommissionmethodService extends ResourceService<IResource>{
   }
 
   getResourceUrl(): string {
-    return '/CommissionMethod/GetAll';
+    return '/CommissionMethod';
   }
 }

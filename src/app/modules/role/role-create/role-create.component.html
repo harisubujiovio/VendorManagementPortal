@@ -1,0 +1,33 @@
+<form [formGroup]="roleForm" novalidate (ngSubmit)="onSubmit()">
+    <mat-card class="shipping-card">
+        <mat-card-header>
+            <mat-card-title>Add Role</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="Enter Role Name" formControlName="name">
+                        <mat-error *ngIf="roleForm.controls['name'].hasError('required')">
+                            Role name is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="Enter Role Description" formControlName="description">
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" type="submit" [class.spinner]="loading"
+                [disabled]="!roleForm.valid">Submit</button>
+            <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+        </mat-card-actions>
+    </mat-card>
+</form>

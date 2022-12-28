@@ -37,6 +37,31 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./modules/partnertype/partnertype.module').then(m => m.PartnertypeModule)
   },
+  {
+    path: 'role', component: AdminComponent,
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./modules/role/role.module').then(m => m.RoleModule)
+  },
+  {
+    path: 'user', component: AdminComponent,
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule)
+  },
+  {
+    path: 'partner', component: AdminComponent,
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./modules/partner/partner.module').then(m => m.PartnerModule)
+  },
+  {
+    path: 'contract', component: AdminComponent,
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./modules/contract/contract.module').then(m => m.ContractModule)
+  },
+  {
+    path: 'sales', component: AdminComponent,
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./modules/sales/sales.module').then(m => m.SalesModule)
+  },
 ];
 
 @NgModule({

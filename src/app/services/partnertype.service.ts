@@ -13,6 +13,6 @@ export abstract class PartnertypeService extends ResourceService<IResource> {
   }
 
   getResourceUrl(): string {
-    return '/PartnerType/GetAll';
+    return '/PartnerType';
   }
 }

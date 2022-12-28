@@ -1,0 +1,89 @@
+<form [formGroup]="partnerForm" novalidate (ngSubmit)="onSubmit()">
+    <mat-card class="shipping-card">
+        <mat-card-header>
+            <mat-card-title>{{ formTitle }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="Enter Partner No" formControlName="partnerNo">
+                        <mat-error *ngIf="partnerForm.controls['partnerNo'].hasError('required')">
+                            Partner No is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="Enter Partner Name" formControlName="partnerName">
+                        <mat-error *ngIf="partnerForm.controls['partnerName'].hasError('required')">
+                            Partner Name is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-label>Select User</mat-label>
+                        <mat-select formControlName="userid" (selectionChange)="onuserchange($event.value)">
+                            <mat-option *ngFor="
+                            let user of users" [value]="user.value">
+                                {{ user.text }}
+                            </mat-option>
+                        </mat-select>
+
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="Enter Email Address" formControlName="email" [(ngModel)]="email">
+                        <mat-error *ngIf="partnerForm.controls['email'].hasError('required')">
+                            Email is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="Enter Mobile Number" formControlName="mobileNumber"
+                            [(ngModel)]="mobileNumber" maxlength="8">
+                        <mat-error *ngIf="partnerForm.controls['mobileNumber'].hasError('required')">
+                            Mobile Number is <strong>required</strong>
+                        </mat-error>
+
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-label>Select Partner Type</mat-label>
+                        <mat-select formControlName="partnerTypeId">
+                            <mat-option *ngFor="
+                            let partnerType of partnerTypes" [value]="partnerType.value">
+                                {{ partnerType.text }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="partnerForm.controls['partnerTypeId'].hasError('required')">
+                            You must make a selection
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" type="submit" [class.spinner]="loading"
+                [disabled]="!partnerForm.valid">Submit</button>
+            <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+        </mat-card-actions>
+    </mat-card>
+</form>
