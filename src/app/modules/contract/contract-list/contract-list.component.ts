@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import { ConfirmationComponent } from 'src/app/shared/dialogs/confirmation/confirmation.component';
 import { merge, tap } from 'rxjs';
 import { ContractDataSource } from '../ContractDataSource';
+import { IUserSession } from 'src/app/models/IUserSession';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 
 @Component({
@@ -29,14 +31,20 @@ export class ContractListComponent implements OnInit {
   @ViewChildren(MatSort) sort: MatSort;
   @ViewChild('input') input: ElementRef;
   private filterValue: string = '';
+
+  user: IUserSession | null;
+
   constructor(
+    private authService: AuthenticationService,
     private contractS: ContractService,
     private router: Router, private dialog: MatDialog,
-    private errorService: ErrorhandlerService) { }
+    private errorService: ErrorhandlerService) {
+    this.user = this.authService.loggedInUser;
+  }
 
   ngOnInit(): void {
     this.dataSource = new ContractDataSource(this.contractS);
-    this.dataSource.fetchContracts('contractNo', 'asc', '');
+    this.dataSource.fetchContracts('contractNo', 'asc', '', 0, 10, this.user?.PartnerId);
     this.dataSource.count$.subscribe(
       (length: number) => this.dataLength = length
     )
@@ -64,7 +72,8 @@ export class ContractListComponent implements OnInit {
       this.sort.direction,
       this.filterValue,
       this.paginator.pageIndex,
-      this.paginator.pageSize);
+      this.paginator.pageSize,
+      this.user?.PartnerId);
   }
   public redirectToDetails = (id: string) => {
     let url: string = `/contract/details/${id}`;

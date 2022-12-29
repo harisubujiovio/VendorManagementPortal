@@ -1,0 +1,14 @@
+<mat-card class="dashboard-card">
+    <mat-card-header class="card-header">
+        <mat-card-title>
+            <h1 class="value-text">{{value}}</h1>
+        </mat-card-title>
+        <div mat-card-avatar class="card-icon">
+            <mat-icon class="avatar-icon" svgIcon={{icon}}></mat-icon>
+        </div>
+    </mat-card-header>
+    <h4 class="title-text">{{title}}</h4>
+    <mat-card-actions>
+        <button mat-button color="primary" (click)="redirectToDetail(this.name,this.filterKey)">Go to Detail</button>
+    </mat-card-actions>
+</mat-card>

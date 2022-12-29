@@ -13,12 +13,13 @@ import { IPartner } from '../models/IPartner';
 export class PartnerService {
 
   constructor(private http: HttpClient) { }
-  getList(sortField: string, sortOrder: string, filterValue: string, pageNumber: number, pageSize: number): Observable<IPartnerRoot> {
+  getList(filterKey: string, sortField: string, sortOrder: string, filterValue: string, pageNumber: number, pageSize: number): Observable<IPartnerRoot> {
     let params = new HttpParams()
       .set('pageNo', pageNumber.toString())
       .set('pageSize', pageSize.toString())
       .set('sortCol', sortField)
-      .set('sortType', sortOrder);
+      .set('sortType', sortOrder)
+      .set('filterKey', filterKey);
     console.log(`${environment.apiUrl}/Partner/GetAll/?${params.toString()}`)
     return this.http.get<IPartnerRoot>(`${environment.apiUrl}/Partner/GetAll/?${params.toString()}`).pipe(
       catchError(handleError<IPartnerRoot>('getPartners'))

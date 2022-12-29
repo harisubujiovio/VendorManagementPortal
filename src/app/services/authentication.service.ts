@@ -36,6 +36,7 @@ export class AuthenticationService {
     var token = localStorage.getItem("jwt");
     if (token) {
       var session = this.jwtHelper.decodeToken<IUserSession>(token)
+      console.log(session);
       return (session != null) ? session : null;
     }
     return null;

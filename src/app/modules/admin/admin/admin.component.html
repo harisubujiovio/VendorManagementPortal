@@ -5,7 +5,9 @@
         </button>
         <h1 class="example-app-name">Vendor Management Portal</h1>
         <span style="flex: 1 1 auto;"></span>
+        <span>{{ user?.Partner}}</span>
         <div>
+
             <button mat-icon-button matTooltip="Notifications">
                 <mat-icon>notifications</mat-icon>
             </button>
@@ -109,7 +111,7 @@
                         Vendor Details
                     </mat-expansion-panel-header>
                     <mat-nav-list dense>
-                        <a mat-list-item routerLink="/partner">
+                        <a mat-list-item routerLink="/partner" *ngIf="!user?.Partner">
                             <mat-icon>supervised_user_circle</mat-icon>Partners
                         </a>
                         <a mat-list-item routerLink="/contract">

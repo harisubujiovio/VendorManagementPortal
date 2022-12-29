@@ -1,1 +1,15 @@
-<p>dashboard works!</p>
+<!--dash.component.html-->
+<div class="grid-container">
+    <h1 class="mat-h1">Dashboard</h1>
+    <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
+        <!--Mini Cards-->
+        <mat-grid-tile *ngFor="let mc of miniCardData" [colspan]="( cardLayout | async )?.miniCard?.cols"
+            [rowspan]="( cardLayout | async )?.miniCard?.rows">
+            <app-minicard [title]="mc.label" [value]="mc.data" [name]="mc.name" [filterKey]="mc.filterKey"
+                [icon]="mc.icon"></app-minicard>
+        </mat-grid-tile>
+
+
+    </mat-grid-list>
+
+</div>

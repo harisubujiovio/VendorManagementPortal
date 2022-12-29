@@ -13,6 +13,8 @@ import { ConfirmationComponent } from './shared/dialogs/confirmation/confirmatio
 import { ErrorComponent } from './shared/dialogs/error/error.component';
 import { SuccessComponent } from './shared/dialogs/success/success.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MinicardComponent } from './modules/card/minicard/minicard.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 export function tokenGetter() {
   return localStorage.getItem("jwt");
 }
@@ -24,7 +26,8 @@ export function tokenGetter() {
     DashboardComponent,
     ConfirmationComponent,
     ErrorComponent,
-    SuccessComponent
+    SuccessComponent,
+    MinicardComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,7 @@ export function tokenGetter() {
     HttpClientModule,
     PublicModule,
     MatIconModule,
+    MatGridListModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

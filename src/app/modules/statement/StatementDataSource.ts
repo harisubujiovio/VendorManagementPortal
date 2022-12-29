@@ -27,10 +27,11 @@ export class StatementsDataSource implements DataSource<IStatement>
         this.StatementsCountSubject.complete();
     }
 
-    fetchStatements(sortField: string, sortOrder: string, filterValue: string, pageIndex = 0, pageSize = 10) {
+    fetchStatements(sortField: string, sortOrder: string, filterValue: string, pageIndex = 0, pageSize = 10,
+        partnerId?: string) {
         this.loadingSubject.next(true);
         this.statementService.getList(
-            sortField, sortOrder, filterValue, pageIndex, pageSize).pipe(
+            sortField, sortOrder, filterValue, pageIndex, pageSize, partnerId).pipe(
                 catchError(handleError<any>('fetchStatements', null)),
                 finalize(() => this.loadingSubject.next(false))
             )

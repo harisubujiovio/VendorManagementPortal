@@ -14,12 +14,20 @@ export class SalesService {
 
   constructor(private http: HttpClient) { }
 
-  getList(sortField: string, sortOrder: string, filterValue: string, pageNumber: number, pageSize: number): Observable<ISalesRoot> {
-    let params = new HttpParams()
-      .set('pageNo', pageNumber.toString())
-      .set('pageSize', pageSize.toString())
-      .set('sortCol', sortField)
-      .set('sortType', sortOrder);
+  getList(sortField: string, sortOrder: string, filterValue: string, pageNumber: number,
+    pageSize: number, partnerId?: string): Observable<ISalesRoot> {
+    let paramsMap = new Map<any, any>();
+    paramsMap.set('pageNo', pageNumber.toString());
+    paramsMap.set('pageSize', pageSize.toString());
+    paramsMap.set('sortCol', sortField);
+    paramsMap.set('sortType', sortOrder);
+    if (partnerId) {
+      paramsMap.set('partnerId', partnerId);
+    }
+    let params = new HttpParams();
+    paramsMap.forEach((value: any, key: any) => {
+      params = params.set(key, value);
+    });
     console.log(`${environment.apiUrl}/Sales/GetAll/?${params.toString()}`)
     return this.http.get<ISalesRoot>(`${environment.apiUrl}/Sales/GetAll/?${params.toString()}`).pipe(
       catchError(handleError<ISalesRoot>('getSales'))

@@ -27,10 +27,11 @@ export class SalesDataSource implements DataSource<ISales>
         this.SalesCountSubject.complete();
     }
 
-    fetchSales(sortField: string, sortOrder: string, filterValue: string, pageIndex = 0, pageSize = 10) {
+    fetchSales(sortField: string, sortOrder: string, filterValue: string, pageIndex = 0,
+        pageSize = 10, partnerId?: string) {
         this.loadingSubject.next(true);
         this.salesService.getList(
-            sortField, sortOrder, filterValue, pageIndex, pageSize).pipe(
+            sortField, sortOrder, filterValue, pageIndex, pageSize, partnerId).pipe(
                 catchError(handleError<any>('fetchSales', null)),
                 finalize(() => this.loadingSubject.next(false))
             )

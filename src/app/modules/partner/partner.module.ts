@@ -7,6 +7,7 @@ import { PublicModule } from '../public/public.module';
 
 const routes: Routes = [
   { path: '', component: PartnerListComponent },
+  { path: 'unmapped/:key', component: PartnerListComponent },
   { path: 'create', component: PartnerCreateComponent },
   { path: 'edit/:id', component: PartnerCreateComponent },
 ];

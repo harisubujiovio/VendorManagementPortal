@@ -5,7 +5,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren }
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationComponent } from 'src/app/shared/dialogs/confirmation/confirmation.component';
 import { merge, tap } from 'rxjs';
 import { PartnerDataSource } from '../PartnerDataSource';
@@ -25,12 +25,21 @@ export class PartnerListComponent implements OnInit, AfterViewInit {
   @ViewChildren(MatSort) sort: MatSort;
   @ViewChild('input') input: ElementRef;
   private filterValue: string = '';
-  constructor(private partnerS: PartnerService, private router: Router, private dialog: MatDialog,
+
+  private filterKey: string = ''
+  constructor(private partnerS: PartnerService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private dialog: MatDialog,
     private errorService: ErrorhandlerService) { }
 
   ngOnInit(): void {
+    this.route.paramMap
+      .subscribe(params => {
+        this.filterKey = params.get('key') || '';
+      });
     this.dataSource = new PartnerDataSource(this.partnerS);
-    this.dataSource.fetchPartners('partnerName', 'asc', '');
+    this.dataSource.fetchPartners(this.filterKey, 'partnerName', 'asc', '');
     this.dataSource.count$.subscribe(
       (length: number) => this.dataLength = length
     )
@@ -54,6 +63,7 @@ export class PartnerListComponent implements OnInit, AfterViewInit {
   BindPartners() {
     console.log(this.filterValue);
     this.dataSource.fetchPartners(
+      this.filterKey,
       this.sort.active,
       this.sort.direction,
       this.filterValue,

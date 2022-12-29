@@ -27,9 +27,9 @@ export class PartnerDataSource implements DataSource<IPartner>
         this.PartnersCountSubject.complete();
     }
 
-    fetchPartners(sortField: string, sortOrder: string, filterValue: string, pageIndex = 0, pageSize = 10) {
+    fetchPartners(filterKey: string, sortField: string, sortOrder: string, filterValue: string, pageIndex = 0, pageSize = 10) {
         this.loadingSubject.next(true);
-        this.partnerService.getList(
+        this.partnerService.getList(filterKey,
             sortField, sortOrder, filterValue, pageIndex, pageSize).pipe(
                 catchError(handleError<any>('fetchPartners', null)),
                 finalize(() => this.loadingSubject.next(false))

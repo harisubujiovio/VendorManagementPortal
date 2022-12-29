@@ -9,6 +9,8 @@ import { UserService } from 'src/app/services/user.service';
 import { ConfirmationComponent } from 'src/app/shared/dialogs/confirmation/confirmation.component';
 import { ErrorhandlerService } from 'src/app/shared/errorhandler.service';
 import { StatementsDataSource } from '../StatementDataSource';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { IUserSession } from 'src/app/models/IUserSession';
 
 @Component({
   selector: 'app-statement-list',
@@ -26,12 +28,19 @@ export class StatementListComponent implements OnInit {
   @ViewChildren(MatSort) sort: MatSort;
   @ViewChild('input') input: ElementRef;
   private filterValue: string = '';
-  constructor(private statementS: StatementService, private router: Router, private dialog: MatDialog,
-    private errorService: ErrorhandlerService) { }
+
+  user: IUserSession | null;
+
+  constructor(private authService: AuthenticationService,
+    private statementS: StatementService,
+    private router: Router, private dialog: MatDialog,
+    private errorService: ErrorhandlerService) {
+    this.user = this.authService.loggedInUser;
+  }
 
   ngOnInit(): void {
     this.dataSource = new StatementsDataSource(this.statementS);
-    this.dataSource.fetchStatements('statementNo', 'asc', '');
+    this.dataSource.fetchStatements('statementNo', 'asc', '', 0, 10, this.user?.PartnerId);
     this.dataSource.count$.subscribe(
       (length: number) => this.dataLength = length
     )
@@ -59,7 +68,8 @@ export class StatementListComponent implements OnInit {
       this.sort.direction,
       this.filterValue,
       this.paginator.pageIndex,
-      this.paginator.pageSize);
+      this.paginator.pageSize,
+      this.user?.PartnerId);
   }
   public redirectToDetails = (id: string) => {
     let url: string = `/statement/details/${id}`;

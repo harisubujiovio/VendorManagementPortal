@@ -9,6 +9,8 @@ import { UserService } from 'src/app/services/user.service';
 import { ConfirmationComponent } from 'src/app/shared/dialogs/confirmation/confirmation.component';
 import { ErrorhandlerService } from 'src/app/shared/errorhandler.service';
 import { SalesDataSource } from '../SalesDataSource';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { IUserSession } from 'src/app/models/IUserSession';
 
 @Component({
   selector: 'app-sales-list',
@@ -33,11 +35,18 @@ export class SalesListComponent implements OnInit {
   @ViewChildren(MatSort) sort: MatSort;
   @ViewChild('input') input: ElementRef;
   private filterValue: string = '';
-  constructor(private salesS: SalesService, private router: Router, private dialog: MatDialog,
-    private errorService: ErrorhandlerService) { }
+
+  user: IUserSession | null;
+
+  constructor(private authService: AuthenticationService,
+    private salesS: SalesService,
+    private router: Router, private dialog: MatDialog,
+    private errorService: ErrorhandlerService) {
+    this.user = this.authService.loggedInUser;
+  }
   ngOnInit(): void {
     this.dataSource = new SalesDataSource(this.salesS);
-    this.dataSource.fetchSales('entryNo', 'asc', '');
+    this.dataSource.fetchSales('entryNo', 'asc', '', 0, 10, this.user?.PartnerId);
     this.dataSource.count$.subscribe(
       (length: number) => this.dataLength = length
     )
@@ -65,7 +74,8 @@ export class SalesListComponent implements OnInit {
       this.sort.direction,
       this.filterValue,
       this.paginator.pageIndex,
-      this.paginator.pageSize);
+      this.paginator.pageSize,
+      this.user?.PartnerId);
   }
   public redirectToDetails = (id: string) => {
     let url: string = `/sales/details/${id}`;
