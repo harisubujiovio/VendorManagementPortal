@@ -61,6 +61,11 @@ export class StatementListComponent implements OnInit {
       )
       .subscribe();
   }
+  onKeyUpEvent(event: any) {
+    console.log(event.target.value);
+    this.filterValue = event.target.value;
+    this.BindStatements();
+  }
   BindStatements() {
     console.log(this.filterValue);
     this.dataSource.fetchStatements(

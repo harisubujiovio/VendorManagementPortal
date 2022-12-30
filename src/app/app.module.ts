@@ -40,7 +40,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:7194"],
+        allowedDomains: ["vendorcmsapi.azurewebsites.net"],
         disallowedRoutes: []
       }
     })

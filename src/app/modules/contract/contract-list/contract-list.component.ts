@@ -65,6 +65,11 @@ export class ContractListComponent implements OnInit {
       )
       .subscribe();
   }
+  onKeyUpEvent(event: any) {
+    console.log(event.target.value);
+    this.filterValue = event.target.value;
+    this.BindContracts();
+  }
   BindContracts() {
     console.log(this.filterValue);
     this.dataSource.fetchContracts(

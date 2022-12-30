@@ -3,7 +3,7 @@
         <button mat-icon-button (click)="snav.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
-        <h1 class="example-app-name">Vendor Management Portal</h1>
+        <h1 class="example-app-name">Supplier Portal</h1>
         <span style="flex: 1 1 auto;"></span>
         <span>{{ user?.Partner}}</span>
         <div>
@@ -108,7 +108,7 @@
 
                 <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
                     <mat-expansion-panel-header>
-                        Vendor Details
+                        Supplier Details
                     </mat-expansion-panel-header>
                     <mat-nav-list dense>
                         <a mat-list-item routerLink="/partner" *ngIf="!user?.Partner">

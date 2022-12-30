@@ -67,6 +67,11 @@ export class SalesListComponent implements OnInit {
       )
       .subscribe();
   }
+  onKeyUpEvent(event: any) {
+    console.log(event.target.value);
+    this.filterValue = event.target.value;
+    this.BindSales();
+  }
   BindSales() {
     console.log(this.filterValue);
     this.dataSource.fetchSales(

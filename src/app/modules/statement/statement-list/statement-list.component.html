@@ -3,7 +3,7 @@
     <div class="flex-container" fxLayout="row" fxLayoutAlign="space-between none">
         <mat-form-field>
             <mat-label>Search</mat-label>
-            <input matInput placeholder="Search By Statement No" value="">
+            <input matInput placeholder="Search By Statement No" (keyup)="onKeyUpEvent($event)">
         </mat-form-field>
     </div>
     <div>
@@ -24,7 +24,7 @@
                 <mat-header-cell *matHeaderCellDef mat-sort-header
                     sortActionDescription="Sort by Statement Date">Statement Date
                 </mat-header-cell>
-                <mat-cell *matCellDef="let resource">{{resource.statementDate}}</mat-cell>
+                <mat-cell *matCellDef="let resource">{{resource.statementDate | date}}</mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="startDate">

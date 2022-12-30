@@ -3,12 +3,9 @@
     <div class="flex-container" fxLayout="row" fxLayoutAlign="space-between none">
         <mat-form-field>
             <mat-label>Search</mat-label>
-            <input matInput placeholder="Search By Partner" value="">
+            <input matInput placeholder="Search By Contract No" (keyup)="onKeyUpEvent($event)">
         </mat-form-field>
 
-        <a [routerLink]="['/contract/create']" mat-fab color="primary">
-            <mat-icon>add</mat-icon>
-        </a>
     </div>
     <div>
         <div class="spinner-container" *ngIf="dataSource.loading$ | async">

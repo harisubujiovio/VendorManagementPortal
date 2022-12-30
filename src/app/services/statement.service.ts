@@ -22,6 +22,7 @@ export class StatementService {
     paramsMap.set('pageSize', pageSize.toString());
     paramsMap.set('sortCol', sortField);
     paramsMap.set('sortType', sortOrder);
+    paramsMap.set('filterKey', filterValue);
     if (partnerId) {
       paramsMap.set('partnerId', partnerId);
     }

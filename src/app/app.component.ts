@@ -8,7 +8,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Vendor Management Portal';
+  title = 'Supplier Portal';
   private path: string = "../assets/images";
   constructor(private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer) {
